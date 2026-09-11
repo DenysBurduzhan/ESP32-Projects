@@ -34,11 +34,16 @@ void GPIO::clearOutput(uint8_t pin) {
 }
 
 void GPIO::setInput(uint8_t pin) {
-    REG_CLR_BIT(GPIO_ENABLE_REG, (1UL << pin));
+   volatile uint32_t* gpio_enable_reg = (volatile uint32_t*)GPIO_ENABLE_REG;
+   *gpio_enable_reg &= ~(1UL << pin);
 }
 
-void GPIO::pullUp(uint8_t pin) {
-    if (pin >= 34) return; 
-    gpio_pullup_en((gpio_num_t)pin);
-    gpio_pulldown_dis((gpio_num_t)pin);
+void GPIO::pullUp(volatile uint32_t* reg) {
+   // volatile uint32_t* pull_up = (volatile uint32_t*)IO_MUX_GPIO0_REG; //Example
+    *reg |= (1UL << 8);
+}
+
+uint32_t GPIO::readInput(uint8_t pin) {
+    volatile uint32_t* gpio_in_reg = (volatile uint32_t*)GPIO_IN_REG;
+    return (*gpio_in_reg >> pin) & 0x01;
 }
