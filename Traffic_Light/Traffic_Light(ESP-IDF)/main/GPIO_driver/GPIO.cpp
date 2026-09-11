@@ -1,7 +1,6 @@
 #include "GPIO.hpp"
 #include "soc/gpio_reg.h"
 #include "soc/io_mux_reg.h"
-#include "driver/gpio.h"
 
 bool GPIO::initGPIO(uint8_t pin){
     volatile uint32_t* io_mux_reg = nullptr;
