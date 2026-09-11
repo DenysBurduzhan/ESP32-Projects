@@ -4,18 +4,17 @@
 #include "driver/gpio.h"
 
 bool GPIO::initGPIO(uint8_t pin){
+    volatile uint32_t* io_mux_reg = nullptr;
+
     switch (pin){
-        case 12:
-            PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTDI_U, FUNC_MTDI_GPIO12);
-            break;
-        case 13:
-            PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTCK_U, FUNC_MTCK_GPIO13);
-            break;
-        case 14:
-            PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTMS_U, FUNC_MTMS_GPIO14);
-            break;
+        case 12: io_mux_reg = (volatile uint32_t*)IO_MUX_GPIO12_REG; break;
+        case 13: io_mux_reg = (volatile uint32_t*)IO_MUX_GPIO13_REG; break;
+        case 14: io_mux_reg = (volatile uint32_t*)IO_MUX_GPIO14_REG; break;
         default: return false;
     }
+    *io_mux_reg &= ~(0b111UL << 12);
+    *io_mux_reg |=  (0b010UL << 12);
+
     return true;
 }
 void GPIO::enableOutput(uint8_t pin) {
