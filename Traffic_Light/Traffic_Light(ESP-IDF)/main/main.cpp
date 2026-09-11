@@ -52,15 +52,11 @@ extern "C" void app_main()
     .intr_type = GPIO_INTR_NEGEDGE
 };
     gpio_config(&io_conf);
-    //for (int j = 0; j < ledsLength; j++){
-        GPIO::initGPIO(yellowLED);
-        GPIO::enableOutput(yellowLED);
-        GPIO::initGPIO(redLED);
-        GPIO::enableOutput(redLED);
-        GPIO::initGPIO(greenLED);
-        GPIO::enableOutput(greenLED);
+    for (int j = 0; j < ledsLength; j++){
+        GPIO::initGPIO(leds[j]);
+        GPIO::enableOutput(leds[j]);
         vTaskDelay(pdMS_TO_TICKS(100));
-    //}
+    }
     
     gpio_install_isr_service(0);
     gpio_isr_handler_add(button, button_isr_handler, NULL);
