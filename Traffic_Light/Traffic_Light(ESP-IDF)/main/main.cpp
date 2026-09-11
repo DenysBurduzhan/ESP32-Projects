@@ -21,20 +21,13 @@ gpio_num_t leds[] = {yellowLED, redLED, greenLED};
 uint16_t ledsLength = sizeof(leds) / sizeof(leds[0]);
 
 
-int i = 0;
-
-void process(uint32_t delayTime)
+void process()
 {
-    GPIO::setOutput(yellowLED);
-    vTaskDelay(pdMS_TO_TICKS(delayTime));
-    GPIO::clearOutput(yellowLED);
-    GPIO::setOutput(redLED);
-    vTaskDelay(pdMS_TO_TICKS(delayTime));
-    GPIO::clearOutput(redLED);
-    GPIO::setOutput(greenLED);
-    vTaskDelay(pdMS_TO_TICKS(delayTime));
-    GPIO::clearOutput(greenLED);
-   // i = (i + 1) % ledsLength;
+    for(int i = 0; i < ledsLength; i++){
+        GPIO::setOutput(leds[i]);
+        vTaskDelay(pdMS_TO_TICKS(delayTime));
+        GPIO::clearOutput(leds[i]);
+    }
 }
 
 void buttonClicked(){
@@ -79,7 +72,7 @@ extern "C" void app_main()
         printf("%ld\n", interruptCount);
         humanPresent = false;
        }else if(!humanPresent){
-        process(delayTime);
+        process();
        }
     }
 }
