@@ -33,7 +33,7 @@ void GPIO::clearOutput(uint8_t pin) {
     *gpio_out_w1tc_reg = (1UL << pin);
 }
 
-void GPIO::setInput(uint8_t pin) {
+void GPIO::enableInput(uint8_t pin) {
    volatile uint32_t* gpio_enable_reg = (volatile uint32_t*)GPIO_ENABLE_REG;
    *gpio_enable_reg &= ~(1UL << pin);
 }
