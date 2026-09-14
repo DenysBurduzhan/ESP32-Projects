@@ -20,5 +20,6 @@ extern "C" void app_main(void) {
         if (!receivedString.empty()) {
             printf("Received string: %s\n", receivedString.c_str());
         }
+        vTaskDelay(pdMS_TO_TICKS(10));
     }
 }
