@@ -30,8 +30,7 @@ std::string readFromUART(uint8_t rx_buffer[BUF_SIZE], int &rx_index) {
         return receivedString;
 }
 
-
-extern "C" void app_main(void) {
+void UART_Init() {
     uart_config_t uart_config = {};
     uart_config.baud_rate = 115200;
     uart_config.data_bits = UART_DATA_8_BITS;
@@ -43,6 +42,11 @@ extern "C" void app_main(void) {
     ESP_ERROR_CHECK(uart_param_config(UART_NUM_0, &uart_config));
     ESP_ERROR_CHECK(uart_set_pin(UART_NUM_0, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
     ESP_ERROR_CHECK(uart_driver_install(UART_NUM_0, BUF_SIZE * 2, 0, 0, NULL, 0));
+}
+
+
+extern "C" void app_main(void) {
+    UART_Init();
 
     uint8_t rx_buffer[BUF_SIZE];
     int rx_index = 0;
