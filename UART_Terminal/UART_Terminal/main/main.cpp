@@ -1,6 +1,7 @@
 #include <cstdio>
 #include "GPIO_driver/GPIO.hpp"
 #include "UART_driver/UART.hpp"
+#include "LED_driver/LED.hpp"
 
 #define ledPIN  25
 #define DHT11_PIN  26
@@ -21,5 +22,11 @@ extern "C" void app_main(void) {
             printf("Received string: %s\n", receivedString.c_str());
         }
         vTaskDelay(pdMS_TO_TICKS(10));
+
+        if(receivedString == "led on"){
+            LED::LED_on(ledPIN);
+        }else if(receivedString == "led on"){
+            LED::LED_off(ledPIN);
+        }
     }
 }
