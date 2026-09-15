@@ -25,7 +25,7 @@ extern "C" void app_main(void) {
 
         if(receivedString == "led on"){
             LED::LED_on(ledPIN);
-        }else if(receivedString == "led on"){
+        }else if(receivedString == "led off"){
             LED::LED_off(ledPIN);
         }
     }
