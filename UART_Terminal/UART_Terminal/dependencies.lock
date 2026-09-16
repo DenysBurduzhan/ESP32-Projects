@@ -39,13 +39,24 @@ dependencies:
     - esp32s2
     - esp32s3
     version: 1.4.0
+  espressif/servo:
+    component_hash: 590e8811e0542d04cef3d355cced4bdbdf132bdd8a770e894201ba24743b2acf
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=4.4'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.0.0
   idf:
     source:
       type: idf
     version: 6.1.0
 direct_dependencies:
 - esp-idf-lib/dht
+- espressif/servo
 - idf
-manifest_hash: 3671216d8015b4e09bceb6389a8042eaff9bfb92dd76dd1ca2f6c133a1555b35
+manifest_hash: 33ad0fdab800acf3fd3492451ddbf54a16da382dc8b52430d7e361bf007dfbc8
 target: esp32
 version: 3.0.0
