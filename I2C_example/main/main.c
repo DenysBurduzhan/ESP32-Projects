@@ -8,7 +8,7 @@
 #define I2C_SDA_PIN 21
 
 i2c_master_bus_handle_t bus_handle;
-
+i2c_master_dev_handle_t dev_handle;
 void i2c_init(void);
 
 void app_main(void)
@@ -28,4 +28,10 @@ void i2c_init(void)
     };
     ESP_ERROR_CHECK(i2c_new_master_bus(&bus_config, &bus_handle));
 
+    i2c_device_config_t dev_config = {
+        .dev_addr_length = 7,
+        .device_address = 0x68,
+        .scl_speed_hz = 400000,
+    };
+    ESP_ERROR_CHECK(i2c_new_device(bus_handle, &dev_config, &dev_handle));
 }
