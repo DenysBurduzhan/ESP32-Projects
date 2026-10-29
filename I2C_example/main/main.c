@@ -35,5 +35,5 @@ void i2c_init(void)
         .device_address = DEV_ADDR,
         .scl_speed_hz = FREQ_400K,
     };
-    ESP_ERROR_CHECK(i2c_new_device(bus_handle, &dev_config, &dev_handle));
+    ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_config, &dev_handle));
 }
