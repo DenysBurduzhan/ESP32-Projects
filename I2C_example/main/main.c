@@ -9,7 +9,7 @@
 #define I2C_SCL_PIN 22
 #define I2C_SDA_PIN 21
 #define FREQ_400K 400000
-#define DEV_ADDR 0x68
+#define MPU9250_DEV_ADDR 0x68
 #define I2C_MASTER_TIMEOUT_MS 1000
 #define MPU9250_WHO_AM_I_REG_ADDR   0x75
 #define MPU9250_PWR_MGMT_1_REG_ADDR 0x6B
@@ -53,7 +53,7 @@ static void i2c_init(i2c_master_bus_handle_t *bus_handle, i2c_master_dev_handle_
 
     i2c_device_config_t dev_config = {
         .dev_addr_length = I2C_ADDR_BIT_LEN_7,
-        .device_address = DEV_ADDR,
+        .device_address = MPU9250_DEV_ADDR,
         .scl_speed_hz = FREQ_400K,
     };
     ESP_ERROR_CHECK(i2c_master_bus_add_device(*bus_handle, &dev_config, dev_handle));
